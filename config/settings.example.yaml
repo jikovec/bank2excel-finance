@@ -1,0 +1,12 @@
+paths:
+  input: input
+  output: output/Personal_Finance_Analysis.xlsx
+  accounts: config/accounts.csv
+  categories: config/categories.csv
+  currency_rates: config/currency_rates.csv
+  cache: cache/currency_rates_cache.csv
+  report: reports/validation_summary.md
+fx:
+  provider: frankfurter
+  mode: historical
+  no_download: false

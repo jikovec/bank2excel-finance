@@ -1,0 +1,8 @@
+Pattern,Category,Subcategory,Category_Type,Confidence,Keywords,Notes,Recurring_Hint
+salary|wage|payroll,Salary,Main Work,income,0.90,salary; wage; payroll,Generic salary rule,TRUE
+grocery|supermarket|market,Food & Groceries,Groceries,food,0.80,grocery; supermarket,Generic grocery rule,FALSE
+restaurant|cafe|coffee,Restaurants & Cafes,Eating Out,food,0.78,restaurant; cafe; coffee,Generic eating-out rule,FALSE
+rent|utilities|electric|water,Housing,Rent / Utilities,housing,0.80,rent; utilities,Generic housing rule,TRUE
+subscription|software|cloud,Subscriptions,Digital Subscription,subscription,0.78,subscription; software,Generic recurring subscription rule,TRUE
+investment|broker|savings,Investments,Investments,savings/investment,0.78,investment; broker; savings,Generic investment transfer rule,TRUE
+fee|bank fee,Bank Fees,Bank Fee,fee,0.80,fee; bank fee,Generic bank-fee rule,TRUE

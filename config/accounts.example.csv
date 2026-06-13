@@ -1,0 +1,4 @@
+Account_Name,Bank,Currency,IBAN_or_Account_Number,Aliases,Belongs_To_Me,Detected_Row_Count,Notes,Transfer_Hints
+Demo Revolut Account,Revolut,EUR,SK00 XXXX XXXX XXXX XXXX 0001,"Demo Revolut; Demo card top-up",TRUE,0,Fake example account only,"payment from demo user; to demo user"
+Demo Local Bank Account,Tatra banka,EUR,SK00 XXXX XXXX XXXX XXXX 0002,"Demo Local Bank; Demo current account",TRUE,0,Fake example account only,
+Demo Savings Account,Slovenska sporitelna,EUR,SK00 XXXX XXXX XXXX XXXX 0003,"Demo Savings; Demo investment transfer",TRUE,0,Fake example account only,

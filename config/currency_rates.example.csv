@@ -1,0 +1,4 @@
+Rate_Date,From_Currency,To_Currency,Rate_To_EUR,Source,Notes
+,EUR,EUR,1,Base,Default identity conversion
+2024-01-02,USD,EUR,0.910000,Manual example,Fake demo historical rate
+2024-01-02,CZK,EUR,0.040000,Manual example,Fake demo historical rate

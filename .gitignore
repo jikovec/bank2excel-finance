@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local/private config
+.env
+config/accounts.csv
+config/categories.csv
+config/settings.yaml
+config/currency_rates.csv
+config/*.local.*
+!config/*.example.*
+!config/README.md
+
+# Private inputs
+input/**/*
+!input/**/
+!input/**/.gitkeep
+!input/**/README.md
+
+# Generated outputs
+output/**/*
+!output/.gitkeep
+
+# Caches
+cache/**/*
+!cache/.gitkeep
+
+# Reports with private data
+reports/**/*
+!reports/.gitkeep
+
+# Excel/generated files with private data
+*.xlsx
+*.xls
+*.csv
+*.pdf
+*.xml
+*.txt
+!*.example.csv
+!*.example.xlsx
+!*.example.txt
+!requirements.txt
+!README.md
+!docs/**/*.md
+
+# OS/editor
+.DS_Store
+Thumbs.db
+~$*
+.vscode/
+.idea/
