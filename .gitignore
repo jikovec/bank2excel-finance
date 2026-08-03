@@ -36,6 +36,11 @@ cache/**/*
 reports/**/*
 !reports/.gitkeep
 
+# Private finance vault snapshots
+finance/private/**/*
+!finance/private/
+!finance/private/README.md
+
 # Excel/generated files with private data
 *.xlsx
 *.xls
@@ -56,3 +61,6 @@ Thumbs.db
 ~$*
 .vscode/
 .idea/
+
+# Obsidian vault metadata
+.obsidian/

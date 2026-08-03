@@ -1,0 +1,227 @@
+{
+  "repo_name": "bank2excel-finance",
+  "repo_purpose": "Local Python CLI workbook generator for personal finance analysis from private bank exports and investment snapshots.",
+  "last_reviewed": "2026-08-03",
+  "documented_release": "v0.0.2",
+  "product_shape": {
+    "type": "local_cli",
+    "not_present": [
+      "web_server",
+      "http_routes",
+      "openapi_contract",
+      "frontend",
+      "deployment_workflow",
+      "dedicated_tests_directory",
+      "ci_workflows"
+    ]
+  },
+  "languages_and_tools": [
+    "Python",
+    "PowerShell",
+    "Markdown",
+    "JSON"
+  ],
+  "important_paths": [
+    {
+      "path": "build_finance_workbook.py",
+      "role": "CLI entrypoint, pipeline orchestration, FX handling, validation, workbook generation.",
+      "privacy": "shareable_source"
+    },
+    {
+      "path": "bank_parsers/",
+      "role": "Transaction and investment parser package.",
+      "privacy": "shareable_source"
+    },
+    {
+      "path": "scripts/",
+      "role": "Local setup and build wrappers.",
+      "privacy": "shareable_source"
+    },
+    {
+      "path": "config/*.example.*",
+      "role": "Fake tracked config templates.",
+      "privacy": "shareable_examples"
+    },
+    {
+      "path": "docs/",
+      "role": "Tracked documentation and agent orientation.",
+      "privacy": "shareable_docs"
+    },
+    {
+      "path": "handoffs/",
+      "role": "Tracked future-agent handoff notes.",
+      "privacy": "shareable_docs_only"
+    },
+    {
+      "path": "finance/",
+      "role": "Tracked personal-finance vault guides, templates, example, and schema.",
+      "privacy": "shareable_structure_only"
+    },
+    {
+      "path": "finance/private/",
+      "role": "Current structured financial snapshot and narrative review.",
+      "privacy": "ignored_private"
+    },
+    {
+      "path": "input/",
+      "role": "Private bank exports and investment snapshots.",
+      "privacy": "ignored_private"
+    },
+    {
+      "path": "output/",
+      "role": "Generated workbook outputs.",
+      "privacy": "ignored_private"
+    },
+    {
+      "path": "cache/",
+      "role": "FX cache artifacts.",
+      "privacy": "ignored_private"
+    },
+    {
+      "path": "reports/",
+      "role": "Generated validation/build evidence and local reports.",
+      "privacy": "ignored_private_by_default"
+    }
+  ],
+  "docs_entry_points": [
+    "README.md",
+    "AGENTS.md",
+    "00_Index.md",
+    "01_Finance_Home.md",
+    "finance/README.md",
+    "finance/how-it-works.md",
+    "docs/README.md",
+    "docs/AGENT-INDEX.md",
+    "docs/OBSIDIAN.md",
+    "docs/SOURCE-MAP.md",
+    "docs/CONNECTIONS.md",
+    "handoffs/INDEX.md"
+  ],
+  "source_areas": [
+    "build_finance_workbook.py",
+    "bank_parsers/common.py",
+    "bank_parsers/revolut.py",
+    "bank_parsers/tatrabanka.py",
+    "bank_parsers/slsp.py",
+    "bank_parsers/investments.py"
+  ],
+  "test_areas": [],
+  "build_commands": [
+    "python build_finance_workbook.py --input input --output output/Personal_Finance_Analysis.xlsx",
+    "python build_finance_workbook.py --input input --output output/Personal_Finance_Analysis.xlsx --no-fx-download",
+    ".\\scripts\\run_build.ps1",
+    ".\\scripts\\run_build_offline.ps1"
+  ],
+  "safe_validation_commands": [
+    "python build_finance_workbook.py --help",
+    "python -m py_compile build_finance_workbook.py bank_parsers/common.py bank_parsers/investments.py bank_parsers/revolut.py bank_parsers/slsp.py bank_parsers/tatrabanka.py",
+    "git diff --check"
+  ],
+  "lint_or_format_commands": [],
+  "report_locations": {
+    "ignored_private": "reports/",
+    "tracked_scrubbed": "docs/reports/"
+  },
+  "financial_vault": {
+    "landing_page": "01_Finance_Home.md",
+    "guide": "finance/README.md",
+    "how_it_works": "finance/how-it-works.md",
+    "snapshot_schema": "finance/current-situation.schema.json",
+    "snapshot_example": "finance/current-situation.example.json",
+    "private_snapshot_json": "finance/private/current-situation.json",
+    "private_snapshot_markdown": "finance/private/current-situation.md",
+    "private_path_policy": "ignored_private"
+  },
+  "handoff_locations": [
+    "handoffs/INDEX.md"
+  ],
+  "decision_locations": [
+    "docs/decisions.md"
+  ],
+  "safety_rules": [
+    "Do not read or edit private finance data unless explicitly authorized.",
+    "Do not read or edit finance/private snapshots unless explicitly authorized.",
+    "Do not run full workbook builds for docs-only work.",
+    "Do not commit, push, publish, tag, deploy, or release without explicit user request.",
+    "Preserve dirty worktree changes and avoid broad staging.",
+    "Treat source, scripts, config examples, .gitignore, and safe command output as higher priority than docs when they disagree."
+  ],
+  "sensitive_path_rules": [
+    ".env is private.",
+    "config/accounts.csv is private.",
+    "config/categories.csv is private.",
+    "config/currency_rates.csv is private.",
+    "config/settings.yaml is private.",
+    "input/ is private.",
+    "output/ is private.",
+    "cache/ is private.",
+    "finance/private/ is private.",
+    "reports/ is private by default."
+  ],
+  "obsidian_conventions": {
+    "local_first": true,
+    "track_obsidian_folder": false,
+    "canonical_links": "relative_markdown_links",
+    "wiki_links_required": false,
+    "graph_hubs": [
+      "00_Index.md",
+      "01_Finance_Home.md",
+      "finance/README.md",
+      "docs/README.md",
+      "docs/AGENT-INDEX.md",
+      "docs/OBSIDIAN.md",
+      "docs/SOURCE-MAP.md",
+      "docs/CONNECTIONS.md"
+    ]
+  },
+  "tag_taxonomy": {
+    "global": [
+      "#repo/index",
+      "#repo/architecture",
+      "#repo/development",
+      "#repo/testing",
+      "#repo/security",
+      "#repo/decision",
+      "#repo/source-map",
+      "#repo/connection-map",
+      "#agent/orientation",
+      "#agent/handoff",
+      "#agent/report",
+      "#obsidian/local",
+      "#obsidian/graph"
+    ],
+    "repo_specific": [
+      "#finance/workbook",
+      "#finance/transactions",
+      "#finance/investments",
+      "#finance/fx",
+      "#finance/config",
+      "#finance/privacy",
+      "#finance/validation",
+      "#finance/snapshot",
+      "#finance/net-worth",
+      "#finance/cash-flow",
+      "#python/cli",
+      "#excel/output",
+      "#bank/revolut",
+      "#bank/tatrabanka",
+      "#bank/slsp"
+    ],
+    "avoid": [
+      "#deployment/cloud",
+      "#api/http",
+      "#finance/advice",
+      "#compliance/certified",
+      "#obsidian/sync",
+      "#encryption/setup",
+      "#account/integration"
+    ]
+  },
+  "known_risks": [
+    "No dedicated tests directory is present.",
+    "No CI workflow directory is present.",
+    "Full builds read private input and rewrite ignored output/cache/report artifacts.",
+    "requirements.txt does not list matplotlib even though build_finance_workbook.py imports it.",
+    "Root reports can contain private data and should not be linked as tracked evidence unless scrubbed."
+  ]
+}

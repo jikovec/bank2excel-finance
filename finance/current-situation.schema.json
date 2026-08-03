@@ -1,0 +1,253 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "current-situation.schema.json",
+  "title": "Private current financial situation",
+  "description": "Point-in-time aggregate personal-finance snapshot. Real instances belong under finance/private/ and must remain ignored.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "status",
+    "as_of",
+    "updated_at",
+    "base_currency",
+    "coverage",
+    "position",
+    "cash_flow",
+    "liquidity",
+    "data_quality",
+    "priorities"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "not_populated",
+        "partial",
+        "current",
+        "stale"
+      ]
+    },
+    "as_of": {
+      "$ref": "#/$defs/nullable_date"
+    },
+    "updated_at": {
+      "$ref": "#/$defs/nullable_datetime"
+    },
+    "base_currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "period_start",
+        "period_end",
+        "included_sources",
+        "excluded_or_missing_sources",
+        "notes"
+      ],
+      "properties": {
+        "period_start": {
+          "$ref": "#/$defs/nullable_date"
+        },
+        "period_end": {
+          "$ref": "#/$defs/nullable_date"
+        },
+        "included_sources": {
+          "$ref": "#/$defs/string_list"
+        },
+        "excluded_or_missing_sources": {
+          "$ref": "#/$defs/string_list"
+        },
+        "notes": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    },
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cash_and_bank",
+        "investments",
+        "other_assets",
+        "liabilities",
+        "net_worth"
+      ],
+      "properties": {
+        "cash_and_bank": {
+          "$ref": "#/$defs/nullable_money"
+        },
+        "investments": {
+          "$ref": "#/$defs/nullable_money"
+        },
+        "other_assets": {
+          "$ref": "#/$defs/nullable_money"
+        },
+        "liabilities": {
+          "$ref": "#/$defs/nullable_nonnegative_money"
+        },
+        "net_worth": {
+          "$ref": "#/$defs/nullable_money"
+        }
+      }
+    },
+    "cash_flow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "income",
+        "expenses",
+        "net_cash_flow",
+        "savings_rate_pct"
+      ],
+      "properties": {
+        "income": {
+          "$ref": "#/$defs/nullable_money"
+        },
+        "expenses": {
+          "$ref": "#/$defs/nullable_money"
+        },
+        "net_cash_flow": {
+          "$ref": "#/$defs/nullable_money"
+        },
+        "savings_rate_pct": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "liquidity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "emergency_fund",
+        "monthly_essential_expenses",
+        "runway_months"
+      ],
+      "properties": {
+        "emergency_fund": {
+          "$ref": "#/$defs/nullable_nonnegative_money"
+        },
+        "monthly_essential_expenses": {
+          "$ref": "#/$defs/nullable_nonnegative_money"
+        },
+        "runway_months": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "data_quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workbook_last_built_at",
+        "validation_status",
+        "missing_fx_rates",
+        "manual_review_items",
+        "notes"
+      ],
+      "properties": {
+        "workbook_last_built_at": {
+          "$ref": "#/$defs/nullable_datetime"
+        },
+        "validation_status": {
+          "type": "string",
+          "enum": [
+            "not_checked",
+            "passed",
+            "warnings",
+            "failed",
+            "unknown"
+          ]
+        },
+        "missing_fx_rates": {
+          "$ref": "#/$defs/nullable_count"
+        },
+        "manual_review_items": {
+          "$ref": "#/$defs/nullable_count"
+        },
+        "notes": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    },
+    "priorities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "risks",
+        "decisions",
+        "next_actions"
+      ],
+      "properties": {
+        "risks": {
+          "$ref": "#/$defs/string_list"
+        },
+        "decisions": {
+          "$ref": "#/$defs/string_list"
+        },
+        "next_actions": {
+          "$ref": "#/$defs/string_list"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nullable_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "nullable_datetime": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "nullable_money": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "nullable_nonnegative_money": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "nullable_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "string_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

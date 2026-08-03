@@ -1,44 +1,44 @@
 # Finance Workbook Generator
 
-A reusable Python pipeline that imports bank exports, normalizes transactions, converts currencies, detects internal transfers, categorizes spending, finds recurring payments, imports investment snapshots, and generates a styled Excel workbook.
+A local Python pipeline that imports bank exports, normalizes transactions, converts currencies, detects internal transfers, categorizes spending, finds recurring payments, imports investment snapshots, and generates a styled Excel workbook.
 
-The project is structured for GitHub use: code and fake examples are tracked; real financial data stays local and ignored.
+The repository is arranged so reusable code, examples, and documentation can be tracked while real financial data stays local and ignored.
 
-## Features
+Current documented release: [v0.0.2](docs/releases/v0.0.2.md).
 
-- Imports bank transaction exports.
-- Normalizes transactions into one shared schema.
-- Detects internal transfers between configured own accounts.
-- Applies configurable category rules.
-- Detects recurring payments.
-- Converts non-EUR amounts using historical transaction-date FX rates.
-- Imports investment valuation snapshots separately from transactions.
-- Generates a styled Excel workbook with dashboards, raw data, validation, accounts, categories, recurring groups, currency rates, and investment sheets.
+## Start Here
 
-## Privacy
+- Personal finance vault: [01_Finance_Home.md](01_Finance_Home.md)
+- Finance snapshot guide: [finance/README.md](finance/README.md)
+- Codex project memory: [00_Index.md](00_Index.md)
+- Agent operating rules: [AGENTS.md](AGENTS.md)
+- Documentation index: [docs/README.md](docs/README.md)
+- Future-agent orientation: [docs/AGENT-INDEX.md](docs/AGENT-INDEX.md)
+- Obsidian/local graph guide: [docs/OBSIDIAN.md](docs/OBSIDIAN.md)
+- Source map: [docs/SOURCE-MAP.md](docs/SOURCE-MAP.md)
+- Connection map: [docs/CONNECTIONS.md](docs/CONNECTIONS.md)
+- First-time setup: [docs/setup/development.md](docs/setup/development.md)
+- Bank export placement: [docs/setup/bank-export-guide.md](docs/setup/bank-export-guide.md)
+- Pipeline architecture: [docs/architecture/pipeline.md](docs/architecture/pipeline.md)
+- Privacy and commit checks: [docs/security/data-privacy.md](docs/security/data-privacy.md)
+- Validation workflow: [docs/testing/verification.md](docs/testing/verification.md)
+- Release notes: [docs/releases/v0.0.2.md](docs/releases/v0.0.2.md)
 
-Never commit real files from:
+## Current Scope
 
-- `input/`
-- `output/`
-- `cache/`
-- `reports/`
-- `.env`
-- `config/accounts.csv`
-- `config/categories.csv`
-- `config/currency_rates.csv`
-- `config/settings.yaml`
+This is a CLI-only workbook generator. The current repo does not contain a web server, HTTP API, or application routes. See [docs/api/README.md](docs/api/README.md) for the CLI interface and the internal parser surfaces.
 
-These paths are ignored by Git. Tracked `.example` files contain fake placeholders only.
+Supported source types in the current code:
 
-## Supported Sources
+- Revolut transaction exports.
+- Tatra banka transaction exports.
+- Slovenska sporitelna transaction exports.
+- SLSP investment and savings valuation snapshots.
+- A legacy prototype transaction import path, when `input/legacy/` exists locally.
 
-- Revolut transaction exports
-- Tatra banka transaction exports
-- Slovenska sporitelna transaction exports
-- SLSP investment valuation snapshots
+Generated workbook sheets include `Dashboard`, `Raw_Transactions`, `Investment_Snapshots`, `Investment_Dashboard`, `Accounts`, `Categories`, `Currency_Rates`, `Recurring`, yearly sheets, `Validation`, and hidden chart data.
 
-## Installation
+## Quick Setup
 
 Python 3.11 or newer is recommended.
 
@@ -50,45 +50,15 @@ pip install -r requirements.txt
 
 On macOS/Linux, activate with `source .venv/bin/activate`.
 
-## First-Time Setup
-
-PowerShell users can run:
+PowerShell users can prepare local private folders and config files with:
 
 ```powershell
 .\scripts\setup_local.ps1
 ```
 
-Or copy the examples manually:
+The setup script creates local folders and copies example files only when the private destination does not already exist.
 
-```powershell
-Copy-Item config/accounts.example.csv config/accounts.csv
-Copy-Item config/categories.example.csv config/categories.csv
-Copy-Item config/currency_rates.example.csv config/currency_rates.csv
-Copy-Item config/settings.example.yaml config/settings.yaml
-```
-
-Then fill `config/accounts.csv`, adjust `config/categories.csv`, and place exports into the correct `input/` subfolders.
-
-## Folder Structure
-
-```text
-.
-├── bank_parsers/
-├── cache/
-├── config/
-├── docs/
-├── input/
-├── output/
-├── reports/
-├── scripts/
-├── build_finance_workbook.py
-├── requirements.txt
-└── README.md
-```
-
-`cache/`, `input/`, `output/`, `reports/`, and real local config files are private runtime locations.
-
-## Commands
+## Build Commands
 
 Normal build:
 
@@ -102,58 +72,60 @@ Offline FX build:
 python build_finance_workbook.py --input input --output output/Personal_Finance_Analysis.xlsx --no-fx-download
 ```
 
-Custom account config:
+Custom settings:
 
 ```bash
-python build_finance_workbook.py --input input --output output/Personal_Finance_Analysis.xlsx --accounts config/accounts.csv
+python build_finance_workbook.py --settings config/settings.yaml --accounts config/accounts.csv --categories config/categories.csv --currency-rates config/currency_rates.csv
 ```
 
-You can also set defaults in `config/settings.yaml`; CLI arguments take precedence.
+Defaults can also be set in `config/settings.yaml`; CLI arguments take precedence.
 
-## Currency Conversion
+## Generated Artifacts
 
-The pipeline converts non-EUR transactions to EUR using historical rates for the transaction booking date. Manual rates are read from `config/currency_rates.csv`. Downloaded FX rates are cached in `cache/currency_rates_cache.csv`.
+- Workbook output: `output/Personal_Finance_Analysis.xlsx`
+- Validation report: `reports/validation_summary.md`
+- FX cache: `cache/currency_rates_cache.csv`
 
-`--no-fx-download` disables external API calls and uses only manual/cache rates. Missing rates are flagged; rates are not invented.
+These runtime artifacts can contain private financial data and are ignored by Git.
 
-## Investment Snapshots
+## Privacy Before Commit
 
-Put SLSP investment valuation snapshots in:
+Never commit real files from:
 
-```text
-input/investments/slsp/
-```
+- `input/`
+- `output/`
+- `cache/`
+- `reports/`
+- `finance/private/`
+- `.env`
+- `config/accounts.csv`
+- `config/categories.csv`
+- `config/currency_rates.csv`
+- `config/settings.yaml`
 
-Snapshots represent holding values at a point in time. They are imported into `Investment_Snapshots` and summarized separately from transaction income and expenses.
-
-## Validation
-
-Validation reports are written to:
-
-```text
-reports/validation_summary.md
-```
-
-Warnings identify parser assumptions, missing FX rates, low-confidence categories, possible duplicate rows, missing balances, and rows needing manual review.
-
-## Maintenance
-
-- Add future exports to the matching `input/` subfolder and rebuild.
-- Update local account identifiers in `config/accounts.csv`.
-- Improve category and recurring rules in `config/categories.csv`.
-- Add new bank parsers under `bank_parsers/` and register them in `build_finance_workbook.py`.
-
-See `docs/maintenance.md` for more detail.
-
-## Security Checklist Before Commit
-
-Run:
+Before committing, run:
 
 ```bash
 git status --ignored
 git diff --cached
 ```
 
-Confirm that only source code, docs, scripts, `.gitignore`, `requirements.txt`, `.env.example`, `.gitkeep`, and fake `.example` files are staged. Do not stage real exports, workbooks, reports, caches, or local config.
+Only source code, documentation, scripts, `.gitignore`, `requirements.txt`, `.env.example`, `.gitkeep`, and fake `.example` files should be staged.
+
+## Repository Map
+
+```text
+bank_parsers/              Bank and investment import parsers
+config/                    Tracked examples plus ignored local config
+docs/                      Developer documentation
+finance/                   Finance vault guides, templates, and ignored private snapshot
+handoffs/                  Agent handoff notes and handoff index
+input/                     Ignored local bank exports
+output/                    Ignored generated workbooks
+reports/                   Ignored private validation/build evidence
+scripts/                   Local setup and build wrappers
+build_finance_workbook.py  CLI entrypoint and workbook builder
+requirements.txt           Python dependency list
+```
 
 No license file is included yet.

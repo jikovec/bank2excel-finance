@@ -1,0 +1,49 @@
+{
+  "$schema": "./current-situation.schema.json",
+  "schema_version": "1.0.0",
+  "status": "not_populated",
+  "as_of": null,
+  "updated_at": null,
+  "base_currency": "EUR",
+  "coverage": {
+    "period_start": null,
+    "period_end": null,
+    "included_sources": [],
+    "excluded_or_missing_sources": [],
+    "notes": [
+      "Safe tracked example only. Real coverage belongs in finance/private/current-situation.json."
+    ]
+  },
+  "position": {
+    "cash_and_bank": null,
+    "investments": null,
+    "other_assets": null,
+    "liabilities": null,
+    "net_worth": null
+  },
+  "cash_flow": {
+    "income": null,
+    "expenses": null,
+    "net_cash_flow": null,
+    "savings_rate_pct": null
+  },
+  "liquidity": {
+    "emergency_fund": null,
+    "monthly_essential_expenses": null,
+    "runway_months": null
+  },
+  "data_quality": {
+    "workbook_last_built_at": null,
+    "validation_status": "not_checked",
+    "missing_fx_rates": null,
+    "manual_review_items": null,
+    "notes": []
+  },
+  "priorities": {
+    "risks": [],
+    "decisions": [],
+    "next_actions": [
+      "Populate a private copy only from verified workbook and validation evidence."
+    ]
+  }
+}
