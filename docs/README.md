@@ -4,6 +4,12 @@ This index is the main entry point for developer documentation. It reflects the
 v0.0.2 vault and documentation structure reviewed on 2026-08-03 while keeping
 private runtime evidence separate from tracked docs.
 
+## Agent Toolkit
+
+- [Workflow routing](../.agent/README.md) - portable skills and shared contracts.
+- [Project identity](../.agent/project.yaml) - stable discovery metadata.
+- [Toolkit decision](decisions.md) - D-008 policy adoption and provider boundaries.
+
 ## Project Overview
 
 - [Personal finance home](../01_Finance_Home.md) - human-facing vault landing

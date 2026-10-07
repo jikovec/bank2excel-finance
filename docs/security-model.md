@@ -75,6 +75,8 @@ exports.
   tracked docs.
 - Keep real current-situation values under `finance/private/`; tracked finance
   templates must contain only structure, `null`, or clearly fake values.
-- Do not commit or push without explicit user approval.
+- Follow the scoped repository delivery grant in
+  [authorization](../.agent/contracts/authorization.md); private-data access
+  and disclosure remain explicitly bounded.
 
 See also `docs/security/data-privacy.md`.

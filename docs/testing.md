@@ -24,6 +24,14 @@ CLI help verifies importability and the current argument surface without reading
 private input files. Compile checks catch syntax errors but can write
 `__pycache__` bytecode in normal Python configurations.
 
+## Agent Toolkit Checks
+
+Run `python .agent/hooks/validate-toolkit.py` for metadata, frontmatter,
+adapter parity, local links, and routing-case coverage. See
+[hook contract](../.agent/hooks/README.md). Review routing cases semantically
+and test provider discovery separately when available. Structural success
+does not prove skill behavior or application correctness.
+
 ## Build Verification
 
 Explicit command from `README.md` and `scripts/run_build.ps1`:

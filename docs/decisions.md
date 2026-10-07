@@ -77,6 +77,38 @@ The private JSON snapshot is a manually maintained summary, and the private
 Markdown note is its narrative interpretation. Unknown or unverified values use
 `null`; zero is reserved for a known zero.
 
+## D-008: Portable Agent Toolkit And Scoped Repository Delivery
+
+Status: current
+
+Context: the user explicitly requested the Repository Agent Toolkit Bootstrap,
+including policy adoption and ordinary user-owned delivery through merge.
+
+Decision: `AGENTS.md` is the always-on contract; `.agent/project.yaml` owns stable
+identity; `.agent/contracts/` owns shared policy; `skills/` owns canonical
+workflows. Provider adapters remain thin. `.agents/skills/` is the current Codex
+discovery path, `.codex/skills/` supplies a compatibility pointer to avoid
+duplicate discovery on clients scanning both locations, and
+`.claude/skills/` plus the `CLAUDE.md` import serve Claude Code.
+
+The user's bootstrap instruction adopts the standing task-related repository
+grant in [.agent/contracts/authorization.md](../.agent/contracts/authorization.md).
+It supersedes the earlier blanket requirement to ask separately for every
+commit/push/PR/merge. Narrower task restrictions, private-data boundaries,
+external protections, and separate release/deployment/publication scope remain
+binding. Ordinary build/fix delivery may continue through verified merge.
+
+The project ID is `github:jikovec/bank2excel-finance`, derived from the verified
+remote. No organization or canonical external registry binding is configured;
+Mind-Seed remains disabled. Local Obsidian/VaultGuard-style documentation does
+not establish external ownership, enrollment, or memory mutation authority.
+
+Consequences: existing product/finance documentation remains authoritative in
+its domain. Memory is contextual; durable decisions are repository-first.
+Deployment/publication skills expose honest absent-target boundaries for the
+local CLI. No hosted runtime, CI, private-data access, or external memory writes
+are introduced. Historical reports retain their original dated observations.
+
 ## Future Decision Template
 
 Use this structure for new decisions. Do not add a decision unless it is backed

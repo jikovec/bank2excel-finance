@@ -1,111 +1,91 @@
-# Codex Project Memory
+# Repository Agent Contract
 
-This repo uses a memory-first workflow for future Codex work. Start with
-`00_Index.md`, then follow the task-specific docs it links before inspecting
-source files.
+Bank2Excel Finance is a local Python CLI workbook generator, owned by the
+user in `jikovec/bank2excel-finance`. It has no hosted runtime, HTTP API,
+frontend, or deployment target. Project identity is
+`github:jikovec/bank2excel-finance`; stable discovery metadata lives in
+[.agent/project.yaml](.agent/project.yaml).
 
-## Required Read Order
+## Start here
 
-Before meaningful work in this repo:
+Before meaningful work:
 
-1. Read `AGENTS.md`.
-2. Read `00_Index.md`.
-3. Read `docs/current-state.md`.
-4. Read `docs/decisions.md`.
-5. Inspect relevant `reports/` or `handoffs/` entries when they exist and are
-   safe to read.
+1. Read this file and applicable scoped instructions.
+2. Read [00_Index.md](00_Index.md).
+3. Read [current state](docs/current-state.md) and [decisions](docs/decisions.md).
+4. Consult relevant safe handoffs or scrubbed reports; ignored root reports
+   require explicit private-data authorization.
+5. Select the canonical workflow through [.agent/README.md](.agent/README.md).
+   Load only the contracts and project documents relevant to the task.
 
-## Operating Rules
+The existing finance vault and documentation indexes remain navigation aids.
+Source, config examples, scripts, and current Git state establish technical
+truth. Historical notes do not establish current operational state.
 
-- Treat current source, config examples, scripts, and Git state as the source of truth.
-- Keep real financial data private. Do not read or edit `.env`, non-example config
-  files, bank exports, generated workbooks, caches, private finance snapshots,
+## Scope and authority
+
+Complete the requested outcome and its authorized repository delivery workflow.
+Do not expand a task into adjacent cleanup, redesign, release, or deployment.
+Preserve existing behavior unless a behavior change is requested.
+
+[Authorization](.agent/contracts/authorization.md) owns the standing grant
+adopted by the user-requested toolkit bootstrap; [D-008](docs/decisions.md)
+records its provenance. Ordinary task-related branches, edits, commits, push,
+PRs, checks, and merge are authorized for this user-owned repository, subject
+to task restrictions and external controls. Do not repeatedly ask for that
+same authority. Release, deployment, and force publication require scope
+covering those outcomes. Repository settings and billing are separate scope.
+
+Credentials, tools, identity labels, memory, and a green check do not grant
+powers. Never circumvent external protections, required reviews, environment
+approvals, organization policy, IAM, or provider controls. Policy amendments
+require explicit policy-authoring authority and cannot authorize themselves.
+
+## Preserve work and privacy
+
+- Inspect current instructions, source, and Git state before changes. Preserve
+  unrelated dirty, untracked, and concurrent work; use isolation when needed.
+- Do not move, delete, or rename existing files without explicit task coverage.
+- Keep real financial data private. Do not read or edit `.env`, non-example
+  config, bank exports, generated workbooks, caches, private finance snapshots,
   or private report contents unless the user explicitly asks.
-- Do not move, delete, or rename files unless the user explicitly asks.
-- Do not commit, push, or publish without an explicit user request.
-- Prefer documentation-only fixes for memory tasks. Do not edit application source
-  code during documentation validation unless the user changes the scope.
-- Avoid full workbook builds unless the user asks for build validation, because
-  builds read private `input/` data and rewrite ignored `output/`, `cache/`, and
-  `reports/` artifacts.
-- Preserve existing behavior unless the user explicitly asks for a behavior
-  change.
-- After meaningful changes, update `docs/current-state.md` or create a handoff
-  note under `handoffs/` when future agents need context.
+- Prefer documentation-only fixes for memory tasks. Do not edit application
+  source during documentation validation unless the user changes the scope.
+- Do not run full workbook builds for documentation/toolkit work. Builds read
+  private input and rewrite ignored output, cache, and report artifacts.
+- Keep real financial values under ignored `finance/private/`. Tracked finance
+  templates describe structure and must not contain personal financial details.
+- Keep financial inputs out of Codespaces and remote agent environments.
+  Do not enable Pages, Packages, wiki duplication, or CI as incidental work.
+- Follow [security model](docs/security-model.md) before interacting with
+  protected paths. Keep credentials, local absolute paths, and private evidence
+  out of tracked files, commits, PRs, and external tools.
 
-## Repo Summary
+## Tooling and evidence
 
-This is a local Python CLI workbook generator. It is not a web app and does not
-contain HTTP routes, an OpenAPI contract, or a frontend.
+`build_finance_workbook.py`, `bank_parsers/`, and `scripts/*.ps1` are the
+application entrypoints. [Commands](docs/commands.md) and
+[testing](docs/testing.md) own command details. Use the project Python
+environment and declared `requirements.txt`; report unavailable dependencies.
+The known `matplotlib` declaration gap is not permission to change dependencies
+as part of unrelated work.
 
-Primary entrypoints:
+Verify proportionately. Never report an unexecuted check as passed. Keep local
+checks, remote checks, merge, release, deployment, and live acceptance distinct.
+Review allowed paths and the staged diff before committing. Update current
+state or a safe handoff when meaningful changes need durable context.
 
-- `build_finance_workbook.py`
-- `bank_parsers/`
-- `scripts/setup_local.ps1`
-- `scripts/run_build.ps1`
-- `scripts/run_build_offline.ps1`
+## Discovery and context
 
-Project memory and handoff docs:
+Canonical workflows live in `skills/`; reusable project extensions, when
+justified, live in `skills/project/`. `develop` means `build`; `reconcile` means
+`fix` with reconciliation intent. Neither alias has a second implementation.
 
-- `01_Finance_Home.md`
-- `finance/README.md`
-- `finance/how-it-works.md`
-- `finance/current-situation.template.md`
-- `finance/current-situation.example.json`
-- `finance/current-situation.schema.json`
-- `00_Index.md`
-- `docs/current-state.md`
-- `docs/decisions.md`
-- `docs/commands.md`
-- `docs/testing.md`
-- `docs/security-model.md`
-- `docs/README.md`
-- `docs/AGENT-INDEX.md`
-- `docs/OBSIDIAN.md`
-- `docs/SOURCE-MAP.md`
-- `docs/CONNECTIONS.md`
-- `docs/agent-index.json`
-- `handoffs/`
+Provider adapters contain discovery pointers only: `.agents/skills` for
+current Codex and `.claude/skills` for Claude Code. `.codex/skills` holds a compatibility pointer to avoid duplicate
+discovery. `CLAUDE.md` imports this contract.
 
-Private current-finance state belongs under `finance/private/`. The tracked
-files under `finance/` define its structure but must not contain real balances
-or personal financial details.
-
-## Validation Expectations
-
-Safe non-private checks:
-
-```bash
-python build_finance_workbook.py --help
-```
-
-```bash
-python -m py_compile build_finance_workbook.py bank_parsers/common.py bank_parsers/investments.py bank_parsers/revolut.py bank_parsers/slsp.py bank_parsers/tatrabanka.py
-```
-
-Privacy checks before staging:
-
-```bash
-git status --ignored
-git diff --cached
-```
-
-See `docs/testing.md` and `docs/commands.md` for the full command reference.
-## GitHub Pro repository memory
-
-<!-- github-pro-memory:2026-07-30 -->
-- Identity: `jikovec/bank2excel-finance`; visibility: public; remote default: `main`; personal-account repository where applicable.
-- Observed state (2026-07-30): protection: not protected; Pages: not enabled; wiki enabled: True; observed Actions runs: 0 in the fixed 2026-06-30..2026-07-30 window.
-- Use selectively: Keep Releases for versioned source milestones; Optional lightweight public CI only after tests are input-independent
-- Explicitly avoid: GitHub Pages; GitHub Packages; Codespaces with financial input; Wiki duplication; Mandatory human approval
-- Actions: provisional private-minute allocation **0/month**; priority: none. Exact billed minutes remain unverified.
-- Branch target: Optional status-check protection if input-independent CI is added; no required human approval for the solo maintainer.
-- CODEOWNERS: No value while there is one owner.
-- Packages: None; requirements are application dependencies, not a reusable package product.
-- Codespaces: Unsuitable because real work depends on private local bank exports; keep processing local.
-- Pages/wiki: Do not enable; public documentation adds little and increases the chance of publishing financial examples or paths. Keep repository Markdown and local memory authoritative despite the enabled wiki flag.
-- Pending remote action only: None until an input-independent CI proposal is separately approved.
-- Safety: this is local guidance only. It does not authorize commit, push, PR, deployment, publication, workflow execution, remote settings, collaborators or billing. Preserve all stricter project-specific no-push/no-deploy and protected-path rules above.
-- Central authority: local project-memory GitHub Pro guidance outside this
-  repository; its machine-specific absolute path is intentionally omitted.
+[Shared contracts](.agent/README.md) own detailed execution policy. Load memory
+and scope contracts only for persistent context, registry/relationship work,
+or memory promotion. No Mind-Seed enrollment or external memory binding is
+established here. Memory remains contextual, and access is not write authority.

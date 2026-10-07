@@ -19,6 +19,16 @@ Not found during the 2026-07-09 index update:
 - `Makefile`
 - `.github/` workflow files
 
+## Agent Toolkit Validation
+
+```bash
+python .agent/hooks/validate-toolkit.py
+```
+
+Requires Python and PyYAML from `requirements.txt`; reads only toolkit metadata,
+links, skills, and the origin URL. No private input or network is used. See
+[check semantics](../.agent/hooks/README.md). This is not application build proof.
+
 ## Setup
 
 Explicit command from `scripts/setup_local.ps1`:
