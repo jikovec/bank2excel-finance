@@ -1,0 +1,32 @@
+schema_version: 1
+project:
+  id: github:jikovec/bank2excel-finance
+  name: Bank2Excel Finance
+  type: application
+repository:
+  host: github
+  owner: jikovec
+  name: bank2excel-finance
+  default_branch: main
+  canonical_remote: origin
+organization:
+  id: null
+  name: null
+ownership:
+  class: user-owned
+agent:
+  instructions: AGENTS.md
+  canonical_skills: skills/
+  project_specific_skills: skills/project/
+environment:
+  primary_runtime: Python
+  package_manager: pip
+  required_tools: [python, git]
+  source_files: [requirements.txt, docs/commands.md, docs/setup/development.md]
+integrations:
+  directory: .agent/integrations/
+workflows:
+  directory: .agent/workflows/
+mind_seed:
+  enabled: false
+  binding: null

@@ -3,6 +3,21 @@
 Reviewed on 2026-08-03 for the v0.0.2 documentation and vault release. No private
 financial inputs or generated artifacts were opened during this review.
 
+## Agent Toolkit
+
+The 2026-10-07 bootstrap adds the portable `.agent/` contracts/metadata,
+eleven canonical workflows under `skills/`, thin Codex/Claude discovery
+adapters, `CLAUDE.md`, routing cases, and a manual metadata validator.
+See [toolkit routing](../.agent/README.md) and [D-008](decisions.md).
+Mind-Seed is disabled: no canonical registry, organization, or external memory
+binding is configured. No private data or application behavior is changed.
+
+The [bootstrap handoff](../handoffs/2026-10-07-agent-toolkit-bootstrap.md)
+records validation and provider limitations separately from the historical
+application validation below. Normal `python` CLI-help execution was unavailable
+because pandas was absent; syntax compilation passed. The toolkit validator
+uses PyYAML from the existing dependency declaration and can be run separately.
+
 ## Product Shape
 
 This repository is a local Python CLI pipeline that builds a personal finance

@@ -51,4 +51,18 @@ This map connects repo areas to their responsibilities and documentation.
 | Privacy and security boundaries | [Security model](security-model.md), [Data privacy](security/data-privacy.md) |
 | Future-agent routing | [Future-agent index](AGENT-INDEX.md), [Connection map](CONNECTIONS.md), [agent-index.json](agent-index.json) |
 
+## Agent Infrastructure
+
+| Area | Responsibility |
+| --- | --- |
+| `.agent/project.yaml` | Stable portable project identity and discovery. |
+| `.agent/contracts/` | Shared policy with one owner per concern. |
+| `skills/` | Canonical workflows; `skills/project/` reserved for justified extensions. |
+| `.agents/skills/`, `.claude/skills/` | Thin native discovery adapters. |
+| `.codex/skills/` | Compatibility pointer; no duplicate active skills. |
+| `CLAUDE.md` | Import of `AGENTS.md`. |
+| `.agent/workflows/`, `.agent/integrations/`, `.agent/hooks/`, `.agent/evals/` | Real shared processes, service references, deterministic checks, routing cases. |
+
+See [routing](../.agent/README.md) for task selection.
+
 Tags: #repo/source-map #repo/architecture #python/cli #finance/workbook

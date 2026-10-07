@@ -18,14 +18,22 @@ work in this repository.
 7. Review [agent-index.json](agent-index.json) when a machine-readable summary
    is useful.
 
+## Repository Workflow Discovery
+
+Use [the portable toolkit](../.agent/README.md) and
+[project metadata](../.agent/project.yaml) to select a canonical skill. Existing
+product and finance indexes remain the project context layer. Provider adapters
+only expose those canonical skills; they do not own policy.
+
 ## Safety Rules
 
 - Do not read or edit `.env`, private config files, bank exports, generated
   workbooks, caches, private finance snapshots, or private root reports unless
   the user explicitly asks.
 - Do not run a full workbook build for docs-only work.
-- Do not commit, push, publish, tag, deploy, or release without an explicit user
-  request.
+- Follow [authorization](../.agent/contracts/authorization.md) for ordinary
+  task-related Git delivery. Release, deployment, and force publication require
+  scope covering those outcomes; preserve narrower user restrictions.
 - Preserve existing dirty worktree changes.
 - Treat current source, config examples, scripts, `.gitignore`, and safe command
   output as the source of truth when docs disagree.

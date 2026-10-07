@@ -1,7 +1,7 @@
 {
   "repo_name": "bank2excel-finance",
   "repo_purpose": "Local Python CLI workbook generator for personal finance analysis from private bank exports and investment snapshots.",
-  "last_reviewed": "2026-08-03",
+  "last_reviewed": "2026-10-07",
   "documented_release": "v0.0.2",
   "product_shape": {
     "type": "local_cli",
@@ -95,7 +95,9 @@
     "docs/OBSIDIAN.md",
     "docs/SOURCE-MAP.md",
     "docs/CONNECTIONS.md",
-    "handoffs/INDEX.md"
+    "handoffs/INDEX.md",
+    ".agent/README.md",
+    ".agent/project.yaml"
   ],
   "source_areas": [
     "build_finance_workbook.py",
@@ -115,7 +117,8 @@
   "safe_validation_commands": [
     "python build_finance_workbook.py --help",
     "python -m py_compile build_finance_workbook.py bank_parsers/common.py bank_parsers/investments.py bank_parsers/revolut.py bank_parsers/slsp.py bank_parsers/tatrabanka.py",
-    "git diff --check"
+    "git diff --check",
+    "python .agent/hooks/validate-toolkit.py"
   ],
   "lint_or_format_commands": [],
   "report_locations": {
@@ -142,7 +145,7 @@
     "Do not read or edit private finance data unless explicitly authorized.",
     "Do not read or edit finance/private snapshots unless explicitly authorized.",
     "Do not run full workbook builds for docs-only work.",
-    "Do not commit, push, publish, tag, deploy, or release without explicit user request.",
+    "Follow .agent/contracts/authorization.md for scoped task-related repository delivery; release, deployment and force publication need outcome-specific scope.",
     "Preserve dirty worktree changes and avoid broad staging.",
     "Treat source, scripts, config examples, .gitignore, and safe command output as higher priority than docs when they disagree."
   ],
@@ -223,5 +226,17 @@
     "Full builds read private input and rewrite ignored output/cache/report artifacts.",
     "requirements.txt does not list matplotlib even though build_finance_workbook.py imports it.",
     "Root reports can contain private data and should not be linked as tracked evidence unless scrubbed."
-  ]
+  ],
+  "agent_toolkit": {
+    "project_metadata": ".agent/project.yaml",
+    "workflow_routing": ".agent/README.md",
+    "canonical_skills": "skills/",
+    "provider_adapters": [
+      ".agents/skills/",
+      ".claude/skills/"
+    ],
+    "policy_adoption": "docs/decisions.md#d-008-portable-agent-toolkit-and-scoped-repository-delivery",
+    "mind_seed_enabled": false,
+    "codex_compatibility_pointer": ".codex/skills/README.md"
+  }
 }

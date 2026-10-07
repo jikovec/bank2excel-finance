@@ -3,7 +3,10 @@
 This folder is for future-agent handoff notes that are safe to keep in the
 repository.
 
-No active handoff notes are present as of 2026-08-03.
+## Current Handoffs
+
+- [2026-10-07 Agent toolkit bootstrap](2026-10-07-agent-toolkit-bootstrap.md) -
+  identity, policy adoption, provider discovery, checks, and preservation limits.
 
 ## When To Add A Handoff
 

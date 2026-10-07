@@ -55,6 +55,12 @@ Key source and runtime folders:
 7. Read `docs/AGENT-INDEX.md` when planning multi-file docs, source, or
    handoff work.
 
+## Agent Toolkit
+
+[Portable workflow routing](.agent/README.md) and
+[stable project identity](.agent/project.yaml) supplement this product index.
+`AGENTS.md` remains the first contract; `skills/` owns the canonical workflows.
+
 ## Memory Files
 
 - [Agent instructions](AGENTS.md)

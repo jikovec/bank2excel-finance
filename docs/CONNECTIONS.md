@@ -70,4 +70,16 @@ python build_finance_workbook.py --help
 - Use normal Markdown links plus tags for graph navigation; keep GitHub
   compatibility as the baseline.
 
+## Agent Toolkit Connections
+
+- [AGENTS.md](../AGENTS.md) routes to [project identity](../.agent/project.yaml),
+  [contracts and skills](../.agent/README.md), and existing product documentation.
+- Provider adapters route to one canonical `skills/` body; `CLAUDE.md` imports
+  the always-on contract. No provider-specific policy fork is maintained.
+- [Private-safe validation](../.agent/workflows/private-safe-validation.md)
+  uses existing commands/testing/privacy docs. [Routing cases](../.agent/evals/skill-routing.md)
+  test intent boundaries; [the validator](../.agent/hooks/README.md) checks structure.
+- [D-008](decisions.md) records adoption; the bootstrap handoff records temporary
+  evidence and limitations. Neither is a second live registry or memory store.
+
 Tags: #repo/connection-map #agent/orientation #obsidian/graph
