@@ -15,6 +15,8 @@ ROOT = Path(__file__).resolve().parents[2]
 BASELINE = set("build investigate research verify review fix release deploy publish push pull".split())
 CONTRACTS = "core authorization verification git-github deployment handoff memory scopes".split()
 ADAPTERS = (".agents", ".claude")
+# Claude Code loads these adapters only on an explicit /name invocation.
+CLAUDE_USER_ONLY = {"release", "deploy", "publish"}
 ERRORS = []
 
 
@@ -120,8 +122,11 @@ def main():
         for provider in ADAPTERS:
             adapter = Path(provider) / "skills" / name / "SKILL.md"
             afm, body = frontmatter(adapter)
-            check(afm == fm, f"Adapter metadata drift: {adapter}")
-            expected = (f"---\nname: {name}\ndescription: {desc}\n---\n\n"
+            gated = provider == ".claude" and name in CLAUDE_USER_ONLY
+            gate = "disable-model-invocation: true\n" if gated else ""
+            check(afm == (dict(fm, **{"disable-model-invocation": True}) if gated else fm),
+                  f"Adapter metadata drift: {adapter}")
+            expected = (f"---\nname: {name}\ndescription: {desc}\n{gate}---\n\n"
                         f"Read and follow [the canonical workflow](../../../{rel.as_posix()})\n"
                         f"before acting. Resolve `{rel.as_posix()}` from the repository root.\n"
                         "Also follow `AGENTS.md` and applicable scoped repository instructions.\n"

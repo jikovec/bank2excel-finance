@@ -51,6 +51,10 @@ Canonical bodies exist only under `skills/`. Thin adapters at
 Claude Code. `.codex/skills/` holds a compatibility pointer, not duplicate
 adapters: the installed Codex scans both locations and would list each twice.
 `CLAUDE.md` uses `@AGENTS.md`. No provider settings grant additional authority.
+The Claude adapters for `release`, `deploy` and `publish` also set
+`disable-model-invocation: true`, so Claude Code loads them only on an explicit
+`/release`, `/deploy` or `/publish`. Canonical skills and Codex adapters keep the
+portable name/description metadata, and the validator enforces both forms.
 
 Discovery paths follow [Codex skills documentation](https://learn.chatgpt.com/docs/build-skills),
 [Claude skills documentation](https://code.claude.com/docs/en/skills), and
