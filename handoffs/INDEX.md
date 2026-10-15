@@ -7,6 +7,9 @@ repository.
 
 - [2026-10-07 Agent toolkit bootstrap](2026-10-07-agent-toolkit-bootstrap.md) -
   identity, policy adoption, provider discovery, checks, and preservation limits.
+- [2026-09-12 Bank2Excel Finance orientation](2026-09-12-bank2excel-finance-orientation.md) -
+  historical project card, privacy boundaries, and remote/runtime questions;
+  workflow and toolkit guidance is superseded by the later bootstrap above.
 
 ## When To Add A Handoff
 
